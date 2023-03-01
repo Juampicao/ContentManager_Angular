@@ -1,0 +1,6 @@
+<!-- <button [type]="type" [ngClass]="class" (click)="onClick()">{{text}} </button> -->
+<button mat-raised-button [type]="type" [ngClass]="class" (click)="onClick()" [attr.*]="attrs['*']"> {{text}} </button>
+
+<!-- ? Pegar este app-button para utilziarlo -->
+<!-- <app-button (click)="onEditContent(contentItem)" [text]="'Editar'" class="bg-green-500">
+</app-button> -->

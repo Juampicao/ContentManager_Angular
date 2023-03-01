@@ -1,0 +1,12 @@
+<div *ngIf=isLoading>
+    <app-spiner></app-spiner>
+</div>
+
+<div *ngIf="!isLoading" class="p-3 ">
+    <iframe [src]="videoUrl" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe>
+    <!-- <iframe width="560" height="315" [src]="videoUrl" frameborder="0"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+    </iframe> -->
+</div>

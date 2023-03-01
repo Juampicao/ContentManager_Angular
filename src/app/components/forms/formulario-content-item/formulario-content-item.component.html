@@ -1,0 +1,87 @@
+<!-- <h1 *ngIf="contentItem"> Editar </h1> -->
+<h1>{{ contentItem? "Editar " : "Crear Nuevo" }}</h1>
+<div class="container ">
+    <!-- Formulario Reactivo -->
+
+    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="formulario">
+        <div class="form-group ">
+            <mat-form-field>
+                <mat-label>Title or Description</mat-label>
+                <input matInput type="text" formControlName="title" placeholder="Titulo..">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group ">
+            <mat-form-field>
+                <mat-label> Description</mat-label>
+                <input matInput type="text" formControlName="description" placeholder="description..">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group ">
+            <mat-form-field>
+                <mat-label>Rating </mat-label>
+                <mat-select formControlName="rating">
+                    <mat-option *ngFor="let option of ratingOptions" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Tags</mat-label>
+                <mat-select formControlName="tags">
+                    <mat-option [value]="tagsOptionsVoid"> Todos </mat-option>
+                    <mat-option *ngFor="let option of tagsOptions" [value]="[option]">{{ option }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Content Type</mat-label>
+                <mat-select formControlName="contentType">
+                    <mat-option [value]="contentTypeOptionVoid"> Todos </mat-option>
+                    <mat-option *ngFor="let option of contentTypeOptions" [value]="option">{{ option }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group ">
+            <mat-form-field>
+                <mat-label>Url</mat-label>
+                <input matInput type="text" formControlName="videoUrl" placeholder="url del video o del pdf..">
+            </mat-form-field>
+        </div>
+
+
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Fecha Creacion</mat-label>
+                <input matInput type="date" formControlName="fechaCreacion">
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-form-field>
+                <mat-label>Duración</mat-label>
+                <mat-select formControlName="duration">
+                    <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+    </form>
+    <div class="flex gap-x-3">
+
+        <button [mat-dialog-close]="true" mat-raised-button type="submit" (click)="onSubmit(myForm)"
+            [class]="contentItem ? 'bg-green-500' : 'searchFilterButton'">{{contentItem? "Guardar" :
+            "Crear"}}</button>
+        <button mat-raised-button type="submit" (click)="resetForm()"
+            class="searchFilterButton bg-dark text-white ">Limpiar
+            Campos</button>
+    </div>
+
+    <!-- Fin Formulario Reactivo -->

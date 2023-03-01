@@ -1,0 +1,47 @@
+table {
+  width: 100%;
+}
+
+.container{
+  padding: 1rem;
+  margin: 1rem;
+}
+
+/* .form-group{
+  display: grid;
+  grid-template-rows: repeat(auto-fill, max-content);
+  max-width: 3px;
+} */
+
+.formulario{
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-gap: 3px;
+}
+
+.mat-form-field{
+  /* background-color: red; */
+  max-width: 100px;
+  text-align: start;
+}
+
+.form-group{
+ display: grid;
+ grid-auto-rows: auto;
+}
+
+.buttonEffect{
+  transition: all 150ms ease-in-out;
+  transform: scale(1);
+}
+
+.searchFilterButton{
+  transition: all 150ms ease-in-out;
+  transform: scale(1);
+  background-color: blue;
+  color: white;
+}
+
+.searchFilterButton:hover{
+    transform: scale(1.1);
+}

@@ -1,0 +1,6 @@
+.searchFilterButton{
+  transition: all 150ms ease-in-out;
+  transform: scale(1);
+  background-color: blue;
+  color: white;
+}

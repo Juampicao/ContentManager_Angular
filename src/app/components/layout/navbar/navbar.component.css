@@ -1,0 +1,13 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.navbar > button {
+  color: white;
+}
+
+.navbar > h2 {
+  color: white;
+}
+
+
