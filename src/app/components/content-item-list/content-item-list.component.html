@@ -1,332 +1,318 @@
 <div class="container ">
-    <!-- Formulario Reactivo -->
 
-    <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="formulario">
-        <div class="form-group ">
-            <mat-form-field>
-                <mat-label>Title or Description</mat-label>
-                <input matInput type="text" formControlName="titleOrDescription" placeholder="Titulo..">
-            </mat-form-field>
-        </div>
+    <div *ngIf=isLoading>
+        <app-spiner></app-spiner>
+    </div>
+    <ng-container *ngIf=!isLoading>
 
+        <!-- Formulario Reactivo -->
 
-        <div class="form-group ">
-            <mat-form-field>
-                <mat-label>Rating Desde</mat-label>
-                <mat-select formControlName="ratingSince">
-                    <mat-option *ngFor="let option of ratingOptions" [value]="option">{{ option }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Rating Until</mat-label>
-                <mat-select formControlName="ratingUntil">
-                    <mat-option *ngFor="let option of ratingOptions" [value]="option">{{ option }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Tags</mat-label>
-                <mat-select formControlName="tags">
-                    <mat-option [value]="tagsOptionsVoid"> Todos </mat-option>
-                    <mat-option *ngFor="let option of tagsOptions" [value]="[option]">{{ option }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Content Type</mat-label>
-                <mat-select formControlName="contentType">
-                    <mat-option [value]="contentTypeOptionVoid"> Todos </mat-option>
-                    <mat-option *ngFor="let option of contentTypeOptions" [value]="option">{{ option }}</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Fecha Desde</mat-label>
-                <input matInput type="date" formControlName="dateSince">
-            </mat-form-field>
-        </div>
-
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Fecha Hasta</mat-label>
-                <input matInput type="date" formControlName="dateUntil">
-            </mat-form-field>
+        <form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="formulario">
+            <div class="form-group ">
+                <mat-form-field>
+                    <mat-label>Title or Description</mat-label>
+                    <input matInput type="text" formControlName="titleOrDescription" placeholder="Titulo..">
+                </mat-form-field>
+            </div>
 
 
-        </div>
+            <div class="form-group ">
+                <mat-form-field>
+                    <mat-label>Rating Desde</mat-label>
+                    <mat-select formControlName="ratingSince">
+                        <mat-option *ngFor="let option of ratingOptions" [value]="option">{{ option }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
 
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Duration Since</mat-label>
-                <mat-select formControlName="durationSince">
-                    <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Rating Until</mat-label>
+                    <mat-select formControlName="ratingUntil">
+                        <mat-option *ngFor="let option of ratingOptions" [value]="option">{{ option }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
 
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Duration Until</mat-label>
-                <mat-select formControlName="durationUntil">
-                    <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Tags</mat-label>
+                    <mat-select formControlName="tags">
+                        <mat-option [value]="tagsOptionsVoid"> Todos </mat-option>
+                        <mat-option *ngFor="let option of tagsOptions" [value]="[option]">{{ option }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
 
-    </form>
-    <div class="flex gap-x-3">
+            </div>
 
-        <button mat-raised-button type="submit" (click)="onSubmit(myForm)" class="searchFilterButton">Submit</button>
-        <button mat-raised-button type="submit" (click)="resetForm()" class="searchFilterButton bg-dark ">Limpiar
-            Campos</button>
-        <button mat-raised-button type="submit" (click)="onCreateContent()" class="searchFilterButton">
-            Crear Nuevo</button>
-        <!-- <button mat-raised-button type="submit" (click)="onGetJsonList()" class="searchFilterButton ">
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Content Type</mat-label>
+                    <mat-select formControlName="contentType">
+                        <mat-option [value]="contentTypeOptionVoid"> Todos </mat-option>
+                        <mat-option *ngFor="let option of contentTypeOptions" [value]="option">{{ option }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Fecha Desde</mat-label>
+                    <input matInput type="date" formControlName="dateSince">
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Fecha Hasta</mat-label>
+                    <input matInput type="date" formControlName="dateUntil">
+                </mat-form-field>
+
+
+            </div>
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Duration Since</mat-label>
+                    <mat-select formControlName="durationSince">
+                        <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Duration Until</mat-label>
+                    <mat-select formControlName="durationUntil">
+                        <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+        </form>
+        <div class="flex gap-x-3">
+
+            <button mat-raised-button type="submit" (click)="onSubmit(myForm)"
+                class="searchFilterButton">Submit</button>
+            <button mat-raised-button type="submit" (click)="resetForm()" class="searchFilterButton bg-dark ">Limpiar
+                Campos</button>
+            <button mat-raised-button type="submit" (click)="onCreateContent()" class="searchFilterButton">
+                Crear Nuevo</button>
+            <!-- <button mat-raised-button type="submit" (click)="onGetJsonList()" class="searchFilterButton ">
             Ver Json List</button> -->
 
-    </div>
+        </div>
 
-    <!-- Fin Formulario Reactivo -->
-
-
-    <div class="my-1 d-flex align-items-center justify-content-center gap-x-3">
-        <h1 class="mt-3"> Seleccionar Vista </h1>
-        <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" [(ngModel)]="screenOptionView">
-            <mat-button-toggle value="table">Tabla</mat-button-toggle>
-            <mat-button-toggle value="cards">Cards</mat-button-toggle>
-            <mat-button-toggle value="prueba">Prueba Video</mat-button-toggle>
-        </mat-button-toggle-group>
-    </div>
-
-    <!--! - - - - - - - - - - - -  TABLE  - - - - - - - - - - - -  -->
-    <div *ngIf="screenOptionView === 'table'">
-        <div class="mat-elevation-z8 rounded rounded-full">
-
-            <!-- !- - - - - - -Paginator - - - - - - -  -->
-            <mat-paginator [pageSizeOptions]="[2, 3, 5, 10,15, 20]" [pageSize]="limitPage" showFirstLastButtons
-                [length]="totalItemsLength" [pageIndex]="currentPage" (page)="pageChanged($event)"
-                aria-label="Select page of periodic elements">
-            </mat-paginator>
-            <!-- !- - - - - - -Paginator - - - - - - -  -->
-
-            <button mat-icon-button (click)="onPreviousPage()">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
-            <button mat-icon-button (click)="this.pageIterator.getNextPage()">
-                <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-
-            <table mat-table [dataSource]="dataSource" matSort>
-
-                <div *ngIf=isLoading>
-                    <app-spiner></app-spiner>
-                </div>
-
-                <!-- Title -->
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
-                    <td mat-cell *matCellDef="let contentItem"> {{contentItem.title}}</td>
-                </ng-container>
-
-                <!-- Content Type -->
-                <ng-container matColumnDef="duration">
-                    <th mat-header-cell *matHeaderCellDef> Tipo </th>
-                    <td mat-cell *matCellDef="let contentItem"> {{contentItem.contentType}} </td>
-                </ng-container>
-
-                <!-- Content Type -->
-                <ng-container matColumnDef="contentType">
-                    <th mat-header-cell *matHeaderCellDef> Duracion </th>
-                    <!-- <td mat-cell *matCellDef="let contentItem"> {{ contentItem.duration.getMinutes() }} minutos </td> -->
-
-                    <td mat-cell *matCellDef="let contentItem"> {{ contentItem.duration.minutes }} minutos </td>
-                </ng-container>
-
-                <!-- ID -->
-                <ng-container matColumnDef="id">
-                    <th mat-header-cell *matHeaderCellDef> Id </th>
-                    <td mat-cell *matCellDef="let contentItem"> {{contentItem.id}} </td>
-                </ng-container>
-
-                <!-- Rating -->
-                <ng-container matColumnDef="rating">
-                    <th mat-header-cell *matHeaderCellDef> Rating </th>
-                    <td mat-cell *matCellDef="let contentItem"> {{contentItem.rating}} </td>
-                </ng-container>
+        <!-- Fin Formulario Reactivo -->
 
 
-                <!-- Tags -->
-                <ng-container matColumnDef="tags">
-                    <th mat-header-cell *matHeaderCellDef> Tags </th>
-                    <td mat-cell *matCellDef="let contentItem"> {{contentItem.tags}} </td>
-                </ng-container>
+        <div class="my-1 d-flex align-items-center justify-content-center gap-x-3">
+            <h1 class="mt-3"> Seleccionar Vista </h1>
+            <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" [(ngModel)]="screenOptionView">
+                <mat-button-toggle value="table">Tabla</mat-button-toggle>
+                <mat-button-toggle value="cards">Cards</mat-button-toggle>
+                <!-- <mat-button-toggle value="prueba">Prueba Video</mat-button-toggle> -->
+            </mat-button-toggle-group>
+        </div>
 
-                <!-- Fecha -->
-                <ng-container matColumnDef="fecha">
-                    <th mat-header-cell *matHeaderCellDef> Fecha </th>
-                    <td mat-cell *matCellDef="let contentItem">
-                        {{contentItem.fechaCreacion.toISOString().split("T")[0]}}
-                    </td>
-                </ng-container>
+        <!--! - - - - - - - - - - - -  TABLE  - - - - - - - - - - - -  -->
+        <div *ngIf="screenOptionView === 'table'">
+            <div class="mat-elevation-z8 rounded rounded-full">
 
-                <!-- Funciton -->
-                <ng-container matColumnDef="funciones">
-                    <th mat-header-cell *matHeaderCellDef> funciones </th>
-                    <td mat-cell *matCellDef="let contentItem">
-                        <button (click)="onViewContent(contentItem)">
-                            <span class="material-symbols-outlined">
-                                zoom_in
-                            </span>
-                        </button>
-                        <!-- <ng-container *ngIf="contentItem.video">
+                <!-- !- - - - - - -Paginator - - - - - - -  -->
+                <mat-paginator [pageSizeOptions]="[2, 3, 5, 10,15, 20]" [pageSize]="limitPage" showFirstLastButtons
+                    [length]="totalItemsLength" [pageIndex]="currentPage" (page)="pageChanged($event)"
+                    aria-label="Select page of periodic elements">
+                </mat-paginator>
+                <!-- !- - - - - - -Paginator - - - - - - -  -->
+
+
+
+                <table mat-table [dataSource]="dataSource" matSort>
+
+
+                    <!-- Title -->
+                    <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+                        <td mat-cell *matCellDef="let contentItem"> {{contentItem.title}}</td>
+                    </ng-container>
+
+                    <!-- Content Type -->
+                    <ng-container matColumnDef="duration">
+                        <th mat-header-cell *matHeaderCellDef> Tipo </th>
+                        <td mat-cell *matCellDef="let contentItem"> {{contentItem.contentType}} </td>
+                    </ng-container>
+
+                    <!-- Content Type -->
+                    <ng-container matColumnDef="contentType">
+                        <th mat-header-cell *matHeaderCellDef> Duracion </th>
+                        <!-- <td mat-cell *matCellDef="let contentItem"> {{ contentItem.duration.getMinutes() }} minutos </td> -->
+
+                        <td mat-cell *matCellDef="let contentItem"> {{ contentItem.duration.minutes }} minutos </td>
+                    </ng-container>
+
+                    <!-- ID -->
+                    <ng-container matColumnDef="id">
+                        <th mat-header-cell *matHeaderCellDef> Id </th>
+                        <td mat-cell *matCellDef="let contentItem"> {{contentItem.id}} </td>
+                    </ng-container>
+
+                    <!-- Rating -->
+                    <ng-container matColumnDef="rating">
+                        <th mat-header-cell *matHeaderCellDef> Rating </th>
+                        <td mat-cell *matCellDef="let contentItem"> {{contentItem.rating}} </td>
+                    </ng-container>
+
+
+                    <!-- Tags -->
+                    <ng-container matColumnDef="tags">
+                        <th mat-header-cell *matHeaderCellDef> Tags </th>
+                        <td mat-cell *matCellDef="let contentItem"> {{contentItem.tags}} </td>
+                    </ng-container>
+
+                    <!-- Fecha -->
+                    <ng-container matColumnDef="fecha">
+                        <th mat-header-cell *matHeaderCellDef> Fecha </th>
+                        <td mat-cell *matCellDef="let contentItem">
+                            <!-- {{contentItem.fechaCreacion.toISOString().split("T")[0]}} -->
+                            {{getDate()}}
+                        </td>
+                    </ng-container>
+
+                    <!-- Funciton -->
+                    <ng-container matColumnDef="funciones">
+                        <th mat-header-cell *matHeaderCellDef> funciones </th>
+                        <td mat-cell *matCellDef="let contentItem">
+                            <button (click)="onViewContent(contentItem)">
+                                <span class="material-symbols-outlined">
+                                    zoom_in
+                                </span>
+                            </button>
+                            <!-- <ng-container *ngIf="contentItem.video">
                             <button (click)="onViewVideo(contentItem.videoUrl)">
                                 <span class="">
                                     Ver
                                 </span>
                             </button>
                         </ng-container> -->
-                        <button (click)="onViewVideo(contentItem.videoUrl)" *ngIf=" contentItem.contentType==='video'">
-                            <span class="material-symbols-outlined">
-                                visibility
-                            </span>
-                        </button>
-                        <!-- <button (click)="onEditContent(contentItem)">
-                            <mat-icon> edit</mat-icon>
-                        </button> -->
-                        <button (click)="onDeleteContent(contentItem.id)">
-                            <mat-icon> delete</mat-icon>
-                        </button>
-                    </td>
-                </ng-container>
-
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
-        </div>
-    </div>
-
-    <!-- !- - - - - - - - - - - -  CARDS  - - - - - - - - - - - -  -->
-
-    <div *ngIf="screenOptionView === 'cards'">
-        <div class="d-flex align-items-center gap-x-3 my-2">
-            <h1 class="mt-1"> Elegir Vista </h1>
-            <mat-button-toggle-group [(ngModel)]="cardNumberColumns">
-                <mat-button-toggle value=1>1 columna</mat-button-toggle>
-                <mat-button-toggle value=2>2 columnas</mat-button-toggle>
-                <mat-button-toggle value=3>3 columnas</mat-button-toggle>
-            </mat-button-toggle-group>
-        </div>
-
-        <div class="row"
-            [ngClass]="{'justify-content-center': cardNumberColumns == 1, 'justify-content-md-center': cardNumberColumns == 2, 'justify-content-lg-center': cardNumberColumns == 3}">
-
-            <!-- <div class="col-md-{{ 12 / cardNumberColumns }}" *ngFor="let item of displayedColumns "> -->
-            <div class="col-md-{{ 12 / cardNumberColumns }}" *ngFor="let contentItem of cardDataSource | async">
-
-                <!-- !- - - - - - - - - - - -  CARD 1  - - - - - - - - - - - -  -->
-                <!-- <mat-card class="example-card col">
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>Shiba Inu</mat-card-title>
-                        <mat-card-subtitle>Dog Breed</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                        alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                        <p>
-                            The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from
-                            Japan.
-                            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-                            originally
-                            bred for hunting.
-                        </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                        <button mat-button>LIKE</button>
-                        <button mat-button>SHARE</button>
-                    </mat-card-actions>
-                </mat-card> -->
-
-                <!-- <mat-card class="example-card" *ngFor="let contentItem of cardDataSource | async"> -->
-                <mat-card class="example-card">
-
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>{{contentItem.title}}</mat-card-title>
-                        <mat-card-subtitle>{{contentItem.description}}</mat-card-subtitle>
-
-                    </mat-card-header>
-
-                    <!-- ! Si es video, renderizar app-video-play -->
-                    <!-- <app-video-play *ngIf="contentItem.contentType === 'video'"
-                        [srcVideo]="contentItem.videoUrl"></app-video-play> -->
-
-                    <mat-card-content class=" justify-content-center align-items-center p-2 ">
-                        <div *ngIf="contentItem.contentType !== 'video'">
-                            <div class="min-h-[100px]  w-100 bg-dark">
-
-                            </div>
-                        </div>
-
-                        <!-- <div class="justify-content-center align-items-center min-h-[100px] w-100 bg-dark mx-auto"> -->
-                        <div class="w-100   bg-dark d-flex">
-                            <app-video-play-two *ngIf=" contentItem.contentType==='video'"
-                                [srcVideo]=" contentItem.videoUrl">
-                            </app-video-play-two>
-                        </div>
-                    </mat-card-content>
-
-                    <mat-card-actions>
-                        <!-- Funciton -->
-                        <div class="d-flex justify-content-center  gap-x-5">
-                            <button (click)=" onViewContent(contentItem)">
-                                <span class="material-symbols-outlined">
-                                    zoom_in
-                                </span>
-                            </button>
-
                             <button (click)="onViewVideo(contentItem.videoUrl)"
                                 *ngIf=" contentItem.contentType==='video'">
                                 <span class="material-symbols-outlined">
                                     visibility
                                 </span>
                             </button>
-
+                            <!-- <button (click)="onEditContent(contentItem)">
+                            <mat-icon> edit</mat-icon>
+                        </button> -->
                             <button (click)="onDeleteContent(contentItem.id)">
                                 <mat-icon> delete</mat-icon>
                             </button>
-                        </div>
-                    </mat-card-actions>
-                </mat-card>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                </table>
+            </div>
+        </div>
+
+        <!-- !- - - - - - - - - - - -  CARDS  - - - - - - - - - - - -  -->
+
+        <div *ngIf="screenOptionView === 'cards'">
+            <div class="d-flex align-items-center gap-x-3 my-2" style="align-items: center;">
+                <h1 class="mt-1"> Elegir Vista </h1>
+                <mat-button-toggle-group [(ngModel)]="cardNumberColumns" [value]="cardNumberColumns">
+                    <mat-button-toggle value=1>1 columna</mat-button-toggle>
+                    <mat-button-toggle value=2>2 columnas</mat-button-toggle>
+                    <mat-button-toggle value=3>3 columnas</mat-button-toggle>
+                    <mat-button-toggle value=4>4 columnas</mat-button-toggle>
+                </mat-button-toggle-group>
 
             </div>
-            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
-        </div>
-    </div>
 
-    <!-- !- - - - - - - - - - - -  PRUEBA VIDEO  - - - - - - - - - - - -  -->
-    <div *ngIf="screenOptionView === 'prueba'">
+            <div class="row"
+                [ngClass]="{'justify-content-center': cardNumberColumns == 1, 'justify-content-md-center': cardNumberColumns == 2, 'justify-content-lg-center': cardNumberColumns == 3, 'justify-content-xl-center': cardNumberColumns == 4}">
+
+                <div class="col-md-{{ 12 / cardNumberColumns }}" *ngFor="let contentItem of cardDataSource | async">
+
+                    <!-- !- - - - - - - - - - - -  CARD 1  - - - - - - - - - - - -  -->
+
+                    <mat-card class="mb-3 h-[380px] justify-content-center bg-white "
+                        [ngClass]="{'col-12': cardNumberColumns === 1, 'col-6': cardNumberColumns === 2, 'col-4': cardNumberColumns === 3, 'col-3': cardNumberColumns === 4}">
+
+                        <mat-card-header class="justify-content-center text-center">
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>{{contentItem.title}}</mat-card-title>
+                            <mat-card-subtitle>{{contentItem.description}}</mat-card-subtitle>
+
+                        </mat-card-header>
+
+                        <!-- ! Si es video, renderizar app-video-play -->
+                        <mat-card-content class=" justify-content-center align-items-center   ">
+
+                            <div *ngIf="contentItem.contentType !== 'video'">
+                                <div>
+                                    <p> Titulo:{{contentItem.title}}</p>
+                                    <p> Id:{{contentItem.id}}</p>
+                                    <p> Tipo: {{contentItem.contentType}}</p>
+                                    <p> Duración: {{this.contentItem.duration.minutes}} minutos </p>
+                                    <p> Tags: {{contentItem.tags}}</p>
+                                    <p> Rating: {{contentItem.rating}}</p>
+                                </div>
+                            </div>
+
+                            <div class="flex items-center text-center"
+                                style="display: flex; justify-content: center; align-items: center;">
+                                <app-video-play-two *ngIf=" contentItem.contentType==='video'"
+                                    [srcVideo]=" contentItem.videoUrl">
+                                </app-video-play-two>
+                            </div>
+                        </mat-card-content>
+
+                        <!-- Funciton -->
+                        <mat-card-actions>
+                            <div class="d-flex justify-content-center  gap-x-5">
+                                <button (click)=" onViewContent(contentItem)">
+                                    <span class="material-symbols-outlined">
+                                        zoom_in
+                                    </span>
+                                </button>
+
+                                <button (click)="onViewVideo(contentItem.videoUrl)"
+                                    *ngIf=" contentItem.contentType==='video'">
+                                    <span class="material-symbols-outlined">
+                                        visibility
+                                    </span>
+                                </button>
+
+                                <button (click)="onDeleteContent(contentItem.id)">
+                                    <mat-icon> delete</mat-icon>
+                                </button>
+                            </div>
+                        </mat-card-actions>
+                    </mat-card>
+
+                </div>
+                <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+        </div>
+
+        <!-- !- - - - - - - - - - - -  PRUEBA VIDEO  - - - - - - - - - - - -  -->
+        <!-- <div *ngIf="screenOptionView === 'prueba'">
         <h1> Prueba Video </h1>
         <app-video-play-two [srcVideo]="'https://www.youtube.com/embed/qz0WjbGlmv0'">
         </app-video-play-two>
-    </div>
+    </div> -->
 
 
-    <!-- <div class="text-center text-xl my-3">
+        <!-- <div class="text-center text-xl my-3">
         <p *ngIf="dataSource.data.length < 1"> Presione "Ver Contenidos" para iniciar</p>
     </div> -->
 
-    <div class="text-center text-xl my-3">
-        <p *ngIf="isResultEmpty"> {{noResultsFounded}}</p>
-    </div>
+        <div class="text-center text-xl my-3">
+            <p *ngIf="isResultEmpty"> {{noResultsFounded}}</p>
+        </div>
+
+
+    </ng-container>
 </div>

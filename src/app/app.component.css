@@ -50,3 +50,7 @@ table {
 .searchFilterButton:hover{
     transform: scale(1.1);
 }
+
+html, body {
+  height: 100%;
+}

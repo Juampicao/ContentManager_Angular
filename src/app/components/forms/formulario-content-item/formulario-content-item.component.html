@@ -49,13 +49,26 @@
             </mat-form-field>
         </div>
 
-        <div class="form-group ">
-            <mat-form-field>
-                <mat-label>Url</mat-label>
-                <input matInput type="text" formControlName="videoUrl" placeholder="url del video o del pdf..">
-            </mat-form-field>
-        </div>
-
+        <ng-container *ngIf="isContentTypeVideo">
+            <div class="form-group ">
+                <mat-form-field>
+                    <mat-label>Url</mat-label>
+                    <input matInput type="text" formControlName="videoUrl" placeholder="url del video o del pdf..">
+                </mat-form-field>
+            </div>
+        </ng-container>
+        <!-- ! Validations -->
+        <ng-container>
+            <div *ngIf="myForm.get('videoUrl')?.invalid && myForm.get('videoUrl')?.errors && 
+        (myForm.get('videoUrl')?.dirty || myForm.get('videoUrl')?.touched)" class="alert alert-danger">
+                <mat-error *ngIf="myForm.get('videoUrl')?.hasError('required')">
+                    La URL del video es requerida.
+                </mat-error>
+                <mat-error *ngIf="myForm.get('videoUrl')?.hasError('pattern')">
+                    La URL del video debe ser un enlace de Youtube válido.
+                </mat-error>
+            </div>
+        </ng-container>
 
         <div class="form-group">
             <mat-form-field>
@@ -64,20 +77,26 @@
             </mat-form-field>
         </div>
 
-        <div class="form-group">
-            <mat-form-field>
-                <mat-label>Duración</mat-label>
-                <mat-select formControlName="duration">
-                    <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
+        <ng-container *ngIf="isContentTypeVideo">
+
+            <div class="form-group">
+                <mat-form-field>
+                    <mat-label>Duración</mat-label>
+                    <mat-select formControlName="duration">
+                        <mat-option *ngFor="let minute of minutes" [value]="minute">{{minute}} minutes</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </ng-container>
+
+
 
     </form>
     <div class="flex gap-x-3">
 
         <button [mat-dialog-close]="true" mat-raised-button type="submit" (click)="onSubmit(myForm)"
-            [class]="contentItem ? 'bg-green-500' : 'searchFilterButton'">{{contentItem? "Guardar" :
+            [class]="contentItem ? 'bg-green-500' : 'searchFilterButton'" [disabled]="!myForm.valid">{{contentItem?
+            "Guardar" :
             "Crear"}}</button>
         <button mat-raised-button type="submit" (click)="resetForm()"
             class="searchFilterButton bg-dark text-white ">Limpiar

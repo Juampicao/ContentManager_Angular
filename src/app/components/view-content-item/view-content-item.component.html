@@ -1,22 +1,32 @@
 <h1 class="text-center my-3"> Ver contenido individual</h1>
-<div class="container">
-    <p> Titulo:{{contentItem.title}}</p>
-    <p> Id:{{contentItem.id}}</p>
-    <p> Tipo: {{contentItem.contentType}}</p>
-    <p> Duración: {{contentItemMinutes}} minutos </p>
-    <p> Tags: {{contentItem.tags}}</p>
-    <p> Rating: {{contentItem.rating}}</p>
-    <p> Fecha Creacion: {{contentItem.fechaCreacion.toISOString().split("T")[0]}}</p>
+<ng-container *ngIf="isLoading">
+    <app-spiner></app-spiner>
+</ng-container>
 
-    <div class="flex space-x-3">
-        <button (click)="onEditContent(contentItem)" mat-raised-button [mat-dialog-close]="true"
-            class="searchFilterButton bg-green-500 text-white">
-            Editar
-        </button>
+<ng-container *ngIf="!isLoading">
+    <div class="container">
+        <p> Titulo:{{contentItem.title}}</p>
+        <p> Id:{{contentItem.id}}</p>
+        <p> Tipo: {{contentItem.contentType}}</p>
+        <ng-container *ngIf="contentItemMinutes !== 0">
+            <p> Duración: {{contentItemMinutes}} minutos </p>
+        </ng-container>
+        <p> Tags: {{contentItem.tags}}</p>
+        <p> Rating: {{contentItem.rating}}</p>
+        <p> Fecha Creacion: {{getDate()}}</p>
+        <p> Video Url: {{contentItem.videoUrl? contentItem.videoUrl : "No hay url de video"}}</p>
 
-        <button (click)="onCreateContent()" mat-raised-button class="searchFilterButton bg-indigo-700 text-white"
-            [mat-dialog-close]="true">
-            Crear Nuevo
-        </button>
+
+        <div class="flex space-x-3">
+            <button (click)="onEditContent(contentItem)" mat-raised-button [mat-dialog-close]="true"
+                class="searchFilterButton bg-green-500 text-white">
+                Editar
+            </button>
+
+            <button (click)="onCreateContent()" mat-raised-button class="searchFilterButton bg-indigo-700 text-white"
+                [mat-dialog-close]="true">
+                Crear Nuevo
+            </button>
+        </div>
     </div>
-</div>
+</ng-container>

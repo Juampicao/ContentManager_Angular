@@ -1,0 +1,26 @@
+<h3 class="text-center font-bold my-2"> Preferencias de Vista</h3>
+<form [formGroup]="myForm" (ngSubmit)="onSubmit(myForm)" class="formulario p-3">
+    <div class="form-group d-flex row">
+        <mat-form-field>
+            <mat-label>Vista preferida</mat-label>
+            <mat-select formControlName="viewPrefered">
+                <mat-option *ngFor="let option of optionsViewPrefered" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cantidad Cards</mat-label>
+            <mat-select formControlName="cardNumberColumns">
+                <mat-option *ngFor="let option of optionsCardNumber" [value]="option">{{ option }}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+
+    </div>
+    <div class="flex gap-x-3 mt-3 justify-items-center">
+
+        <button [mat-dialog-close]="true" mat-raised-button type="submit" (click)="onSubmit(myForm)"
+            [class]="'searchFilterButton'">Guardar </button>
+
+    </div>
+
+</form>

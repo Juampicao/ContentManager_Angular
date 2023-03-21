@@ -1,4 +1,4 @@
-<div class="items-center">
+<!-- <div class="items-center">
 
     <mat-toolbar class="bg-indigo-700 navbar items-center gap-x-10">
 
@@ -6,17 +6,15 @@
             <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="onErrorFunction()">
-                <mat-icon>dialpad</mat-icon>
-                <span>Contenidos</span>
-            </button>
+
             <button mat-menu-item (click)="onErrorFunction()">
                 <mat-icon>voicemail</mat-icon>
                 <span>Planes</span>
             </button>
-            <button mat-menu-item (click)="onErrorFunction()">
-                <mat-icon>notifications_off</mat-icon>
-                <button routerLink="/help">Ayuda</button>
+
+            <button mat-menu-item (click)="onEditPreferences()">
+                <mat-icon>settings</mat-icon>
+                <button routerLink="/help">Preferencias Usuario</button>
             </button>
         </mat-menu>
 
@@ -30,5 +28,40 @@
             Salir
         </button>
 
+    </mat-toolbar>
+</div> -->
+
+<div class="">
+
+    <mat-toolbar class="flex bg-blue-700 navbar items-center gap-x-10">
+
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon class="text-white hover:duration-150 duration-200 hover:scale-110  ">more_vert</mat-icon>
+        </button>
+
+
+        <mat-menu #menu="matMenu">
+
+            <button mat-menu-item (click)="onErrorFunction()">
+                <mat-icon>voicemail</mat-icon>
+                <span>Planes</span>
+            </button>
+
+            <button mat-menu-item (click)="onEditPreferences()">
+                <mat-icon>settings</mat-icon>
+                <button routerLink="/help">Preferencias Usuario</button>
+            </button>
+        </mat-menu>
+
+
+        <div class="flex text-center mx-auto items-center cursor-pointer">
+            <img src="../../../../assets/img/logo.png" class=" cursor-pointer bg-cover w-[50px] h-[50px]" alt="">
+            <a routerLink="/inicio" class="text-decoration-none text-white ">Gestiona tus Contenidos</a>
+        </div>
+
+        <button routerLink="/login" class="text-decoration-none text-white " mat-icon-button
+            class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+            <mat-icon>login</mat-icon>
+        </button>
     </mat-toolbar>
 </div>

@@ -1,0 +1,63 @@
+<div class="row"
+    [ngClass]="{'justify-content-center': cardNumberColumns == 1, 'justify-content-md-center': cardNumberColumns == 2, 'justify-content-lg-center': cardNumberColumns == 3, 'justify-content-xl-center': cardNumberColumns == 4}">
+
+    <!-- <div class="col-md-{{ 12 / cardNumberColumns }}" *ngFor="let contentItem of cardDataSource | async"> -->
+    <div class="row col-md-{{ 12 / cardNumberColumns }}" *ngFor="let contentItem of cardDataSource | async">
+
+        <!-- !- - - - - - - - - - - -  CARD 1  - - - - - - - - - - - -  -->
+
+        <!-- <mat-card class="example-card w-[550px] h-[350px] mb-5  "> -->
+        <mat-card
+            [ngClass]="{'col-12': cardNumberColumns == 1, 'col-6': cardNumberColumns == 2, 'col-4': cardNumberColumns == 3, 'justify-content-xl-center': cardNumberColumns == 4}">
+            <mat-card-header class="justify-content-center text-center">
+                <div mat-card-avatar class="example-header-image"></div>
+                <mat-card-title>{{contentItem.title}}</mat-card-title>
+                <mat-card-subtitle>{{contentItem.description}}</mat-card-subtitle>
+
+            </mat-card-header>
+
+            <!-- ! Si es video, renderizar app-video-play -->
+            <mat-card-content class=" justify-content-center align-items-center p-2  ">
+
+                <div *ngIf="contentItem.contentType !== 'video'">
+                    <div>
+                        <p> Titulo:{{contentItem.title}}</p>
+                        <p> Id:{{contentItem.id}}</p>
+                        <p> Tipo: {{contentItem.contentType}}</p>
+                        <p> Duración: {{this.contentItem.duration.minutes}} minutos </p>
+                        <p> Tags: {{contentItem.tags}}</p>
+                        <p> Rating: {{contentItem.rating}}</p>
+                    </div>
+                </div>
+
+                <div class="d-flex container-fluid">
+                    <app-video-play-two *ngIf=" contentItem.contentType==='video'" [srcVideo]=" contentItem.videoUrl">
+                    </app-video-play-two>
+                </div>
+            </mat-card-content>
+
+            <mat-card-actions class="mt-auto">
+                <!-- Funciton -->
+                <div class="d-flex justify-content-center  gap-x-5">
+                    <button (click)=" onViewContent(contentItem)">
+                        <span class="material-symbols-outlined">
+                            zoom_in
+                        </span>
+                    </button>
+
+                    <button (click)="onViewVideo(contentItem.videoUrl)" *ngIf=" contentItem.contentType==='video'">
+                        <span class="material-symbols-outlined">
+                            visibility
+                        </span>
+                    </button>
+
+                    <button (click)="onDeleteContent(contentItem.id)">
+                        <mat-icon> delete</mat-icon>
+                    </button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+
+    </div>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div>
